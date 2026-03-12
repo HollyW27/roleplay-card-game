@@ -1,15 +1,30 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
+import { AppSession } from './app.session';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    private readonly appSession: AppSession,
+  ) {}
   //Add arg to spec Question numbers
   @Get('questionOrder')
   getRandomQuestionOrderArray(): Array<number> {
-    return this.appService.getRandomQuestionOrder();
+    return this.appSession.getRandomQuestionOrder();
   }
-
+  @Get('currentQuestionNumber')
+  getCurrentQuestionNumber(): number {
+    return this.appSession.getCurrentNumber();
+  }
+  @Get('getNextQuestion')
+  getNextQuestionNumber(): void {
+    this.appSession.getNextQuestion();
+  }
+  @Get('getPreviousQuestion')
+  getPreviousQuestionNumber(): void {
+    this.appSession.getPreviousQuestion();
+  }
   @Get('randomURL')
   getRandomURL(): string {
     return this.appService.getRandomURL();
