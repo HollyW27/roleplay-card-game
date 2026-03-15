@@ -9,10 +9,6 @@ export class AppController {
     private readonly appSession: AppSession,
   ) {}
   //Add arg to spec Question numbers
-  @Get('questionOrder')
-  getRandomQuestionOrderArray(): Array<number> {
-    return this.appSession.getRandomQuestionOrder();
-  }
   @Get('currentQuestionNumber')
   getCurrentQuestionNumber(): number {
     return this.appSession.getCurrentNumber();
@@ -28,5 +24,9 @@ export class AppController {
   @Get('randomURL')
   getRandomURL(): string {
     return this.appService.getRandomURL();
+  }
+  @Get('currentQuestion')
+  getCurrentQuestion(): string {
+    return this.appSession.getCurrentQuestion();
   }
 }
